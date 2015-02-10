@@ -1,6 +1,6 @@
 # bowling
 
-[![Build Status](https://api.travis-ci.org/rossey/bowling.svg)
+[![Build Status](https://travis-ci.org/rossey/bowling.svg?branch=master)](https://travis-ci.org/rossey/bowling)
 
 [Uncle Bob's Bowling Kata](http://butunclebob.com/ArticleS.UncleBob.TheBowlingGameKata)
 
