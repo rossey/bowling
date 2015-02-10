@@ -5,11 +5,16 @@ namespace Bowling;
 class Game
 {
     /**
+     * @var int
+     */
+    private $score;
+
+    /**
      * @param int $pins
      */
     public function roll($pins)
     {
-
+        $this->score += $pins;
     }
 
     /**
@@ -17,6 +22,6 @@ class Game
      */
     public function score()
     {
-        return 0;
+        return $this->score;
     }
 }
