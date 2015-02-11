@@ -36,22 +36,62 @@ class Game
         $score = 0;
         $frameIndex = 0;
         for ($frame = 0; $frame < 10; $frame++) {
-            if ($this->isSpare($frameIndex)) { // spare!
-                $score += 10 + $this->rolls[$frameIndex + 2];
+            if ($this->isStrike($frameIndex)) {
+                $score += 10 + $this->strikeBonus($frameIndex);
+                $frameIndex++;
+            } elseif ($this->isSpare($frameIndex)) {
+                $score += 10 + $this->spareBonus($frameIndex);
+                $frameIndex += 2;
             } else {
-                $score += $this->rolls[$frameIndex] + $this->rolls[$frameIndex + 1];
+                $score += $this->sumOfBallsInFrame($frameIndex);
+                $frameIndex += 2;
             }
-            $frameIndex += 2;
         }
         return $score;
     }
 
     /**
-     * @param $frameIndex
+     * @param int $frameIndex
+     * @return bool
+     */
+    private function isStrike($frameIndex)
+    {
+        return $this->rolls[$frameIndex] == 10;
+    }
+
+    /**
+     * @param int $frameIndex
      * @return bool
      */
     private function isSpare($frameIndex)
     {
         return ($this->rolls[$frameIndex] + $this->rolls[$frameIndex + 1]) === 10;
+    }
+
+    /**
+     * @param int $frameIndex
+     * @return int
+     */
+    private function strikeBonus($frameIndex)
+    {
+        return $this->rolls[$frameIndex + 1] + $this->rolls[$frameIndex + 2];
+    }
+
+    /**
+     * @param int $frameIndex
+     * @return int
+     */
+    private function spareBonus($frameIndex)
+    {
+        return $this->rolls[$frameIndex + 2];
+    }
+
+    /**
+     * @param int $frameIndex
+     * @return int
+     */
+    private function sumOfBallsInFrame($frameIndex)
+    {
+        return $this->rolls[$frameIndex] + $this->rolls[$frameIndex + 1];
     }
 }

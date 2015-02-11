@@ -54,6 +54,23 @@ class GameTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(16, $this->bowlingGame->score());
     }
 
+    /**
+     * @throws \Exception
+     */
+    public function testOneStrike()
+    {
+        $this->rollStrike();
+        $this->bowlingGame->roll(3);
+        $this->bowlingGame->roll(4);
+        $this->rollMany(16, 0);
+        $this->assertEquals(24, $this->bowlingGame->score());
+    }
+
+    private function rollStrike()
+    {
+        $this->bowlingGame->roll(10);
+    }
+
     private function rollSpare()
     {
         $this->bowlingGame->roll(5);
